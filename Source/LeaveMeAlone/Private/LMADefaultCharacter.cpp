@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "LMADefaultCharacter.h"
 #include "Camera/CameraComponent.h"
@@ -70,6 +70,7 @@ void ALMADefaultCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &ALMADefaultCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &ALMADefaultCharacter::MoveRight);
+    PlayerInputComponent->BindAxis("Zoom", this, &ALMADefaultCharacter::ZoomCamera);
 
 }
 void ALMADefaultCharacter::MoveForward(float Value)
@@ -77,7 +78,17 @@ void ALMADefaultCharacter::MoveForward(float Value)
 	AddMovementInput(GetActorForwardVector(), Value);
 }
 void ALMADefaultCharacter::MoveRight(float Value)
+
 {
 	AddMovementInput(GetActorRightVector(), Value);
 }
+void ALMADefaultCharacter::ZoomeCamera(float Value) {
+  if (SpringArmComponent) {
 
+    float NewArmLength = FMath::Clamp(SpringArmComponent->TargetArmLength -
+                                          (AxisValue * ZoomSpeed),
+                                      MinArmLength, MaxArmLength);
+
+    SpringArmComponent->TargetArmLength = NewArmLength;
+  }
+}

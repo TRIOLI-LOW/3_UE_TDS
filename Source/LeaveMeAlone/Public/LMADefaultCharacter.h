@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "LMADefaultCharacter.generated.h"
+#include ""
 class UCameraComponent; // будет отвечать за компонент камеры.
 class USpringArmComponent; // используется для автоматического управления поведением камеры вситуациях, когда она становится закрытой.
 
@@ -36,9 +37,14 @@ protected:
 private:
 	void MoveForward(float Value);
 	void MoveRight(float Value);
+    void ZoomCamera(float Value);
+
+    float MinArmLength = 500.0f; 
+    float MaxArmLength = 2000.0f; 
+    float ZoomSpeed = 100.0f; 
 
 	float YRotation = -75.0f; // отвечает за поворот камеры по оси Y.
-	float ArmLength = 1400.0f; // отвечает за длину штатива.
+	float ArmLength = 2000.0f; // отвечает за длину штатива.
 	float FOV = 55.0f; // отвечает за поле зрения камеры.
 public:	
 	// Called every frame
