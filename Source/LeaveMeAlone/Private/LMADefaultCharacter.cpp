@@ -82,13 +82,14 @@ void ALMADefaultCharacter::MoveRight(float Value)
 {
 	AddMovementInput(GetActorRightVector(), Value);
 }
-void ALMADefaultCharacter::ZoomeCamera(float Value) {
+void ALMADefaultCharacter::ZoomCamera(float Value) {
   if (SpringArmComponent) {
 
     float NewArmLength = FMath::Clamp(SpringArmComponent->TargetArmLength -
-                                          (AxisValue * ZoomSpeed),
+                                          (Value * ZoomSpeed),
                                       MinArmLength, MaxArmLength);
 
     SpringArmComponent->TargetArmLength = NewArmLength;
+	ArmLength = NewArmLength;
   }
 }

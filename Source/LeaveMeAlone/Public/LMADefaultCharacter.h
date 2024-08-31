@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "LMADefaultCharacter.generated.h"
-#include ""
+
 class UCameraComponent; // будет отвечать за компонент камеры.
 class USpringArmComponent; // используется для автоматического управления поведением камеры вситуациях, когда она становится закрытой.
 
